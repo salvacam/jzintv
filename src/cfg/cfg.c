@@ -14,7 +14,6 @@
  * ============================================================================
  */
 
-
 #include "config.h"
 #include "lzoe/lzoe.h"
 #include "file/file.h"
@@ -457,6 +456,7 @@ LOCAL char *joy_cfg[MAX_JOY];
 /* ======================================================================== */
 /*  CFG_INIT     -- Parse command line and get started                      */
 /* ======================================================================== */
+
 #ifdef GCWZERO
 int cfg_init(cfg_t *cfg, int argc, char * argv[])
 #else
@@ -502,7 +502,6 @@ void cfg_init(cfg_t *cfg, int argc, char * argv[])
 #ifdef WII
     silent = 1;
 #endif
-
     /* -------------------------------------------------------------------- */
     /*  Set up the default state for everything.                            */
     /* -------------------------------------------------------------------- */
@@ -862,7 +861,10 @@ void cfg_init(cfg_t *cfg, int argc, char * argv[])
     /*  off by reading in the EXEC, GROM, and GAME images.                  */
     /* -------------------------------------------------------------------- */
     exec_type = 0;
-    sprintf(buf, "%s/%s", dirname(strdup(cfg->fn_game)), cfg->fn_exec);
+
+    sprintf(buf, "%s", cfg->fn_game);
+    dirname(buf);
+    sprintf(buf, "%s/%s", buf, cfg->fn_exec);
     f = path_fopen(rom_path, buf, "rb");
     if (!f || file_read_rom16(f, 4096, cfg->exec_img) != 4096) {
         sprintf(buf, "%s/.jzintv/bios/%s", getenv("HOME"), cfg->fn_exec);
@@ -903,7 +905,9 @@ void cfg_init(cfg_t *cfg, int argc, char * argv[])
     }
     lzoe_fclose(f);
 
-    sprintf(buf, "%s/%s", dirname(strdup(cfg->fn_game)), cfg->fn_grom);
+    sprintf(buf, "%s", cfg->fn_game);
+    dirname(buf);
+    sprintf(buf, "%s/%s", buf, cfg->fn_grom);
     f = path_fopen(rom_path, buf, "rb");
     if (!f || file_read_rom8 (f, 2048, cfg->grom_img) != 2048) {
         sprintf(buf, "%s/.jzintv/bios/%s", getenv("HOME"), cfg->fn_grom);
@@ -1159,9 +1163,9 @@ locutus_loaded:
 
     if (cfg->ecs_enable > 0)
     {
-        // sprintf(buf, "%s", strdup(cfg->fn_game));
-        // sprintf(buf, "%s/%s", dirname(buf), cfg->fn_ecs);
-        sprintf(buf, "%s/%s", dirname(strdup(cfg->fn_game)), cfg->fn_ecs);
+        sprintf(buf, "%s", cfg->fn_game);
+        dirname(buf);
+        sprintf(buf, "%s/%s", buf, cfg->fn_ecs);
         f = path_fopen(rom_path, buf, "rb");
         if (!f || file_read_rom16(f, 12*1024, cfg->ecs_img) != 12*1024) {
             sprintf(buf, "%s/.jzintv/bios/%s", getenv("HOME"), cfg->fn_ecs);

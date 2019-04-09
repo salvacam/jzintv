@@ -17,3 +17,5 @@ extern int menu_customoverlays;
 extern int selectedoption;
 extern int displaycontrolinfo;
 extern int displayplayer2;
+
+

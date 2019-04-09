@@ -342,6 +342,7 @@ LOCAL int gfx_setup_sdl_surface
 #else
     scr = SDL_SetVideoMode(actual_x, actual_y, desire_bpp, sdl_flags);
 #endif
+    SDL_ShowCursor(0);
 
     if (scr) 
         gfx->pvt->scr = scr;
@@ -714,8 +715,8 @@ int gcw0_showerror(int number)
 {
     SDL_Init( SDL_INIT_EVERYTHING ); 
     SDL_Surface *screen;
-    SDL_ShowCursor(0);
     screen = SDL_SetVideoMode( 320, 240, 32, SDL_SWSURFACE );
+    SDL_ShowCursor(0);
     TTF_Init();
     TTF_Font *ttffont = NULL;
     SDL_Color text_color = {255, 0, 0};
