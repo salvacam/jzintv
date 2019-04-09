@@ -246,8 +246,9 @@ LOCAL int legacy_read_bincfg(const char *bin_fn, const char *cfg_fn,
 #ifdef GCWZERO //change .cfg path if jzintv is looking for it
 char *cf;
 cf=strrchr(cfg_fn,'/');
-char *cf2;
-sprintf(cf2, "%s/.jzintv/configfiles", getenv("HOME"));
+char *cf2, buf[PATH_MAX];
+sprintf(buf, "%s/.jzintv/configfiles", getenv("HOME"));
+cf2 = strdup(buf);
 char *cf_final=NULL;
 cf_final = CALLOC(char, 150);
 int i=0;
@@ -555,8 +556,10 @@ char *legacy_bincfg
 #ifdef GCWZERO
 char *pc;
 pc=strrchr(p_cfg1_fn,'/');
-char *pd;
-sprintf(pd, "%s/.jzintv/configfiles", getenv("HOME"));
+char *pd, buf[PATH_MAX];
+sprintf(buf, "%s/.jzintv/configfiles", getenv("HOME"));
+pd = strdup(buf);
+
 char *finaloutput=NULL;
 finaloutput = CALLOC(char, 150);
 int i=0;

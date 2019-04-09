@@ -331,7 +331,13 @@ LOCAL int gfx_setup_sdl_surface
 
 #ifdef GCWZERO
 //    scr = SDL_SetVideoMode(320, 240, 16, SDL_SWSURFACE);
-    scr = SDL_SetVideoMode(320, 240, 16, SDL_HWSURFACE|SDL_HWPALETTE|SDL_TRIPLEBUF);
+    scr = SDL_SetVideoMode(320, 240, 16, SDL_HWSURFACE | SDL_HWPALETTE |
+        #ifdef SDL_TRIPLEBUF
+            SDL_TRIPLEBUF
+        #else
+            SDL_DOUBLEBUF
+        #endif
+    );
 
 #else
     scr = SDL_SetVideoMode(actual_x, actual_y, desire_bpp, sdl_flags);

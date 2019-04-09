@@ -74,7 +74,7 @@ typedef struct cfg_t
     mem_t       ecs_ram;        /* 8-bit Scratchpad RAM at 0x4000 - 0x47FF  */
 #ifdef GCWZERO
 #else
-    jlp_t       jlp;            /* Jean-Luc Project Support                 */
+    // jlp_t       jlp;            /* Jean-Luc Project Support                 */
     t_locutus_wrap locutus;
 #endif
     uint_16     exec_img[4096 + 256];

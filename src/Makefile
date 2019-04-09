@@ -46,9 +46,9 @@ RM = rm -f
 DEF_FLAGS = -DGP2X -DGCWZERO 
 #OPT_FLAGS  = -O2 #for release
 #OPT_FLAGS = -ggdb 
-OPT_FLAGS = -O0 -g
+# OPT_FLAGS = -O0 -g
 #OPT_FLAGS = -O2 -ggdb
-## OPT_FLAGS = -O6 -fomit-frame-pointer -ggdb
+OPT_FLAGS = -O6 -fomit-frame-pointer -ggdb
 #OPT_FLAGS = -pg -ggdb -DLOCAL=
 #OPT_FLAGS = -tpp6 -axMiKW -ip -vec_report3 -opt_report -ansi_alias -restrict -DHAVE_RESTRICT -align -O3 -Ob1 # -ipo # intel icc flags
 

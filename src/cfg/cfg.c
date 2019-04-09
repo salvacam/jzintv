@@ -533,10 +533,18 @@ void cfg_init(cfg_t *cfg, int argc, char * argv[])
     cfg->start_dly  = -1;           /* No startup delay by default.         */
 
 #ifdef GCWZERO
-    sprintf(cfg->fn_exec, "%s/.jzintv/bios/exec.bin", getenv("HOME"));   /* Default name to look for     */
-    sprintf(cfg->fn_grom, "%s/.jzintv/bios/grom.bin", getenv("HOME"));   /* ...                          */
-    sprintf(cfg->fn_game, "%s/.jzintv/bios/game.rom", getenv("HOME"));   /* ...                          */
-    sprintf(cfg->fn_ecs, "%s/.jzintv/bios/ecs.bin", getenv("HOME"));    /* ...                          */
+    char buf[PATH_MAX];
+    sprintf(buf, "%s/.jzintv/bios/exec.bin", getenv("HOME"));   /* Default name to look for     */
+    cfg->fn_exec    = strdup(buf);   /* Default name to look for     */
+
+    sprintf(buf, "%s/.jzintv/bios/grom.bin", getenv("HOME"));
+    cfg->fn_grom    = strdup(buf);
+
+    sprintf(buf, "%s/.jzintv/bios/game.rom", getenv("HOME"));
+    cfg->fn_game    = strdup(buf);
+
+    sprintf(buf, "%s/.jzintv/bios/ecs.bin", getenv("HOME"));
+    cfg->fn_ecs     = strdup(buf);
 #else
     cfg->fn_exec    = strdup("exec.bin");   /* Default name to look for     */
     cfg->fn_grom    = strdup("grom.bin");   /* ...                          */
