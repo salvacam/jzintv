@@ -281,10 +281,10 @@ int main(int argc, char *argv[])
     char title[128];
 
 #ifdef GCWZERO //create directory structure
-mkdir("/media/home/.jzintellivision",S_IRWXU);
-mkdir("/media/home/.jzintellivision/bios",S_IRWXU);
-mkdir("/media/home/.jzintellivision/overlays",S_IRWXU);
-mkdir("/media/home/.jzintellivision/configfiles",S_IRWXU);
+snprintf(title, sizeof(title), "%s/.jzintv", getenv("HOME")); mkdir(title, 0777);
+snprintf(title, sizeof(title), "%s/.jzintv/bios", getenv("HOME")); mkdir(title, 0777);
+snprintf(title, sizeof(title), "%s/.jzintv/overlays", getenv("HOME")); mkdir(title, 0777);
+snprintf(title, sizeof(title), "%s/.jzintv/configfiles", getenv("HOME")); mkdir(title, 0777);
 #endif
 
     /* -------------------------------------------------------------------- */
@@ -515,7 +515,11 @@ jzp_printf("cpu.now = %-8d  stic.now = %-8d diff = %-8d step = %-8d\n", (int)int
 		jzp_printf("Looking for gcw0 .config file...\n");
 		foundconfig=1;
 		FILE *configuration;
-		configuration=fopen("/media/home/.jzintellivision/.configuration","r");
+
+        char buf[PATH_MAX];
+        sprintf(buf, "%s/.jzintv/.configuration", getenv("HOME"));
+
+		configuration=fopen(buf,"r");
 		if (!configuration) {
 			jzp_printf("None found, for now lets use default settings\n");
 			menu_sound=configurationsettings[0];
@@ -620,7 +624,11 @@ jzp_printf("cpu.now = %-8d  stic.now = %-8d diff = %-8d step = %-8d\n", (int)int
 				menu_sound,menu_customoverlays,menu_transparency,menu_overlayposition); 
 //now save new configuration
 			FILE *configuration;
-			configuration=fopen("/media/home/.jzintellivision/.configuration","w");
+
+            char buf[PATH_MAX];
+            sprintf(buf, "%s/.jzintv/.configuration", getenv("HOME"));
+
+			configuration=fopen(buf,"w");
 			fprintf(configuration, "%d%d%d%d", menu_sound, menu_customoverlays, menu_transparency, menu_overlayposition);
 			fclose(configuration);
 			}

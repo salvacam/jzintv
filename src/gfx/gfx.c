@@ -729,7 +729,7 @@ int gcw0_showerror(int number)
     destination.w = 310; 
     destination.h = 50;
     SDL_BlitSurface(textSurface, NULL, screen, &destination);
-    textSurface = TTF_RenderText_Solid(ttffont, "Place in $HOME/.jzintellivision/bios/", text_color);
+    textSurface = TTF_RenderText_Solid(ttffont, "Place in $HOME/.jzintv/bios/", text_color);
     destination.y = 30;
     SDL_BlitSurface(textSurface, NULL, screen, &destination);
     SDL_FreeSurface(textSurface);

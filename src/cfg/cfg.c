@@ -533,10 +533,10 @@ void cfg_init(cfg_t *cfg, int argc, char * argv[])
     cfg->start_dly  = -1;           /* No startup delay by default.         */
 
 #ifdef GCWZERO
-    cfg->fn_exec    = strdup("/media/home/.jzintellivision/bios/exec.bin");   /* Default name to look for     */
-    cfg->fn_grom    = strdup("/media/home/.jzintellivision/bios/grom.bin");   /* ...                          */
-    cfg->fn_game    = strdup("/media/home/.jzintellivision/bios/game.rom");   /* ...                          */
-    cfg->fn_ecs     = strdup("/media/home/.jzintellivision/bios/ecs.bin");    /* ...                          */
+    sprintf(cfg->fn_exec, "%s/.jzintv/bios/exec.bin", getenv("HOME"));   /* Default name to look for     */
+    sprintf(cfg->fn_grom, "%s/.jzintv/bios/grom.bin", getenv("HOME"));   /* ...                          */
+    sprintf(cfg->fn_game, "%s/.jzintv/bios/game.rom", getenv("HOME"));   /* ...                          */
+    sprintf(cfg->fn_ecs, "%s/.jzintv/bios/ecs.bin", getenv("HOME"));    /* ...                          */
 #else
     cfg->fn_exec    = strdup("exec.bin");   /* Default name to look for     */
     cfg->fn_grom    = strdup("grom.bin");   /* ...                          */

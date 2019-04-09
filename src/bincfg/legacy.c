@@ -247,7 +247,7 @@ LOCAL int legacy_read_bincfg(const char *bin_fn, const char *cfg_fn,
 char *cf;
 cf=strrchr(cfg_fn,'/');
 char *cf2;
-cf2="/media/home/.jzintellivision/configfiles";
+sprintf(cf2, "%s/.jzintv/configfiles", getenv("HOME"));
 char *cf_final=NULL;
 cf_final = CALLOC(char, 150);
 int i=0;
@@ -260,7 +260,7 @@ jzp_printf("\n\n\nCF_FINAL=\n%s",cf_final);
     {
         bc = bc_parse_cfg(fc, bin_fn, cfg_fn);
         lzoe_fclose(fc);
-#ifdef GCWZERO//also search for .cfg file in .jzintellivision/configfiles directory
+#ifdef GCWZERO//also search for .cfg file in .jzintv/configfiles directory
 } else
     if (cf_final && (fc = lzoe_fopen(cf_final, "r")) != NULL)
     {
@@ -391,10 +391,11 @@ char *legacy_bincfg
     *legacy_rom = 0;
 
 #ifdef GCWZERO //save filename for later if config file not present
-    strcpy(romfilename, fname);
+    sprintf(romfilename, "%s/.jzintv/.filename", getenv("HOME"));
+    // strcpy(romfilename, fname);
     FILE *file;
-    file=fopen("/media/home/.jzintellivision/.filename","w");
-    fputs(romfilename, file);
+    file=fopen(romfilename,"w");
+    fputs(fname, file);
     fclose(file);
 #endif
 
@@ -555,7 +556,7 @@ char *legacy_bincfg
 char *pc;
 pc=strrchr(p_cfg1_fn,'/');
 char *pd;
-pd="/media/home/.jzintellivision/configfiles";
+sprintf(pd, "%s/.jzintv/configfiles", getenv("HOME"));
 char *finaloutput=NULL;
 finaloutput = CALLOC(char, 150);
 int i=0;
@@ -563,10 +564,11 @@ while(*pd){ finaloutput[i++]=*pd++; }
 while(*pc){ finaloutput[i++]=*pc++; }
 finaloutput[i]='\0';
 #ifdef GCWZERO //save filename for later if config file not present
-    strcpy(romfilename, finaloutput);
+    // strcpy(romfilename, finaloutput);
+    sprintf(romfilename, "%s/.jzintv/.filename", getenv("HOME"));
     FILE *file;
-    file=fopen("/media/home/.jzintellivision/.filename","w");
-    fputs(romfilename, file);
+    file=fopen(romfilename,"w");
+    fputs(finaloutput, file);
     fclose(file);
 #endif
             legacy_print_loading(p_bin1_fn, finaloutput);
