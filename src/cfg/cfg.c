@@ -869,19 +869,22 @@ void cfg_init(cfg_t *cfg, int argc, char * argv[])
     if (!f || file_read_rom16(f, 4096, cfg->exec_img) != 4096) {
         sprintf(buf, "%s/.jzintv/bios/%s", getenv("HOME"), cfg->fn_exec);
         f = path_fopen(rom_path, buf, "rb");
-
         if (!f || file_read_rom16(f, 4096, cfg->exec_img) != 4096)
         {
-            #ifdef GCWZERO
-                jzp_printf("\nNo exec image found\n");
-                return 2;
-            #else
-                if (errno) perror("file_read_rom16");
-                fprintf(stderr, "ERROR:  Could not read EXEC image '%s'\n",
-                        cfg->fn_exec);
-                dump_search_path(rom_path);
-                exit(1);
-            #endif
+            f = path_fopen(rom_path, "./miniexec.bin", "rb");
+            if (!f || file_read_rom16(f, 4096, cfg->exec_img) != 4096)
+            {
+                    #ifdef GCWZERO
+                        jzp_printf("\nNo exec image found\n");
+                        return 2;
+                    #else
+                        if (errno) perror("file_read_rom16");
+                        fprintf(stderr, "ERROR:  Could not read EXEC image '%s'\n",
+                                cfg->fn_exec);
+                        dump_search_path(rom_path);
+                        exit(1);
+                    #endif
+            }
         }
     }
     
@@ -914,16 +917,20 @@ void cfg_init(cfg_t *cfg, int argc, char * argv[])
         f = path_fopen(rom_path, buf, "rb");
         if (!f || file_read_rom8 (f, 2048, cfg->grom_img) != 2048)
         {
-        #ifdef GCWZERO
-            jzp_printf("\nNo grom image found\n");
-            return 4;
-        #else
-            if (errno) perror("file_read_rom8");
-            fprintf(stderr, "ERROR:  Could not read GROM image '%s'\n",
-                    cfg->fn_grom);
-            dump_search_path(rom_path);
-            exit(1);
-        #endif
+            f = path_fopen(rom_path, "./minigrom.bin", "rb");
+            if (!f || file_read_rom8 (f, 2048, cfg->grom_img) != 2048)
+            {
+                #ifdef GCWZERO
+                    jzp_printf("\nNo grom image found\n");
+                    return 4;
+                #else
+                    if (errno) perror("file_read_rom8");
+                    fprintf(stderr, "ERROR:  Could not read GROM image '%s'\n",
+                            cfg->fn_grom);
+                    dump_search_path(rom_path);
+                    exit(1);
+                #endif
+            }
         }
     }
     lzoe_fclose(f);
@@ -1172,11 +1179,15 @@ locutus_loaded:
             f = path_fopen(rom_path, buf, "rb");
             if (!f || file_read_rom16(f, 12*1024, cfg->ecs_img) != 12*1024)
             {
-                if (errno) perror("errno value e");
-                fprintf(stderr, "ERROR:  Could not read ECS ROM image '%s'\n",
-                        cfg->fn_ecs);
-                dump_search_path(rom_path);
-                exit(1);
+                f = path_fopen(rom_path, "./miniecs.bin", "rb");
+                if (!f || file_read_rom16(f, 12*1024, cfg->ecs_img) != 12*1024)
+                {
+                    if (errno) perror("errno value e");
+                    fprintf(stderr, "ERROR:  Could not read ECS ROM image '%s'\n",
+                            cfg->fn_ecs);
+                    dump_search_path(rom_path);
+                    exit(1);
+                }
             }
         }
         lzoe_fclose(f);
