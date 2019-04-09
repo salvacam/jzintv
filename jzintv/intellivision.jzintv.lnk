@@ -1,5 +1,5 @@
-title=Intellivision Emulator
-description=jzIntv
+title=Intellivision
+description=jzIntv Emulator
 exec=/home/retrofw/emus/jzintv/jzintv.dge
 selectordir=/home/retrofw/roms/intellivision
 selectorfilter=.rom,.bin,.int,.itv
