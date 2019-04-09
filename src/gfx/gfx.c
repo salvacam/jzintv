@@ -1131,7 +1131,7 @@ uint_32 gfx_tick_common(periph_p gfx_periph, uint_32 len)
 		SDL_FreeSurface (virtualnumberpad2);
 	} else if (virtualnumberpad == 3)
 	{
-		SDL_Surface *virtualkeyboardshift = IMG_Load("./ECS_kb_layout(shift).png");
+		SDL_Surface *virtualkeyboardshift = IMG_Load("./ECS_kb_layout_shift.png");
 		SDL_Surface *virtualkeyboard      = IMG_Load("./ECS_kb_layout.png");
 		int x;
 		int y;

@@ -89,7 +89,7 @@ OBJS += pads/pads_cgc_linux.o
 
 ipk: $(PROG)
 	@rm -rf /tmp/.jzintv-ipk/ && mkdir -p /tmp/.jzintv-ipk/root/home/retrofw/emus/jzintv /tmp/.jzintv-ipk/root/home/retrofw/apps/gmenu2x/sections/emulators /tmp/.jzintv-ipk/root/home/retrofw/apps/gmenu2x/sections/emulators.systems
-	@cp -r ../jzintv/jzintv.dge ../jzintv/miniecs.bin ../jzintv/miniexec.bin ../jzintv/minigrom.bin ../jzintv/background.png ../jzintv/jzintv.man.txt ../jzintv/jzintv.png ../jzintv/ProggyTiny.ttf ../jzintv/ECS_kb_layout.png ../jzintv/ECS_kb_layout\(shift\).png ../jzintv/defaultoverlay.png /tmp/.jzintv-ipk/root/home/retrofw/emus/jzintv
+	@cp -r ../jzintv/jzintv.dge ../jzintv/miniecs.bin ../jzintv/miniexec.bin ../jzintv/minigrom.bin ../jzintv/background.png ../jzintv/jzintv.man.txt ../jzintv/jzintv.png ../jzintv/ProggyTiny.ttf ../jzintv/ECS_kb_layout.png ../jzintv/ECS_kb_layout_shift.png ../jzintv/defaultoverlay.png /tmp/.jzintv-ipk/root/home/retrofw/emus/jzintv
 	@cp ../jzintv/jzintv.lnk /tmp/.jzintv-ipk/root/home/retrofw/apps/gmenu2x/sections/emulators
 	@cp ../jzintv/intellivision.jzintv.lnk /tmp/.jzintv-ipk/root/home/retrofw/apps/gmenu2x/sections/emulators.systems
 	@sed "s/^Version:.*/Version: $$(date +%Y%m%d)/" ../jzintv/control > /tmp/.jzintv-ipk/control
