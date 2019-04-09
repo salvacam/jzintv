@@ -886,7 +886,7 @@ uint_32 gfx_tick_common(periph_p gfx_periph, uint_32 len)
 		if (!menu_transparency)	t=255;
 		else 			t=128; //50% transparency
 //	draw transparentbackground
-		SDL_Surface *menubackgroundimage=IMG_Load("./jzintv.png"); //default background
+		SDL_Surface *menubackgroundimage=IMG_Load("./background.png"); //default background
 		static SDL_Rect menubackgroundimage_rect;
 		menubackgroundimage_rect.x = 0;
 		menubackgroundimage_rect.y = 0;
