@@ -550,7 +550,7 @@ jzp_printf("cpu.now = %-8d  stic.now = %-8d diff = %-8d step = %-8d\n", (int)int
 		//handle vertical movements
 		if (intv.pad0.l[15]==4 || intv.pad0.r[15]==4) //left or right pad up
 		{
-			if 	(selectedoption == 0)	selectedoption=8;
+			if 	(selectedoption == 0)	selectedoption=7;
 			else if (selectedoption == 5)	selectedoption=3; //skip spacer
 			else				selectedoption--;
 			if 	(displaycontrolinfo)	selectedoption=5;
@@ -560,16 +560,28 @@ jzp_printf("cpu.now = %-8d  stic.now = %-8d diff = %-8d step = %-8d\n", (int)int
 
 		if (intv.pad0.l[15]==64 || intv.pad0.r[15]==64) //left or right pad down
 		{
-			if 	(selectedoption == 8)	selectedoption=0;
+			if 	(selectedoption == 7)	selectedoption=0;
 			else if (selectedoption == 3)	selectedoption=5; //skip spacer
 			else				selectedoption++;
 			if 	(displaycontrolinfo)	selectedoption=5;
 	                intv.pad0.l[15]=0;
 	                intv.pad0.r[15]=0;
 		}
+
+        if (
+            intv.pad0.l[11] || intv.pad0.r[11] // || //kpad enter
+            // intv.pad0.l[12] || intv.pad0.r[12] || //top fire button
+            // intv.pad0.l[13] || intv.pad0.r[13] // || //left fire button
+            // intv.pad0.l[14] || intv.pad0.r[14]   //right fire button
+            )
+        {
+            intv.event.do_menu = 0;
+        }
+
 		//change settings
 		//handle selected options with left or right pad
-		if (	intv.pad0.l[11] || intv.pad0.r[11] || //kpad enter
+		if (
+        	// intv.pad0.l[11] || intv.pad0.r[11] || //kpad enter
 			intv.pad0.l[12] || intv.pad0.r[12] || //top fire button
 			intv.pad0.l[13] || intv.pad0.r[13] || //left fire button
 			intv.pad0.l[14] || intv.pad0.r[14]  ) //right fire button
@@ -601,16 +613,16 @@ jzp_printf("cpu.now = %-8d  stic.now = %-8d diff = %-8d step = %-8d\n", (int)int
 				displaycontrolinfo = (!displaycontrolinfo) ;
 				
 			}
-			if (selectedoption == 6)//back
-			{
-				intv.event.do_menu = 0;
-			}
-			if (selectedoption == 7)//reset
+			// if (selectedoption == 6)//back
+			// {
+			// 	intv.event.do_menu = 0;
+			// }
+			if (selectedoption == 6)//reset
 			{
 				intv.event.do_menu = 0;
 		        	intv.do_reset = 2;
 			}
-			if (selectedoption == 8)//quit
+			if (selectedoption == 7)//quit
 			{
 				intv.do_exit  = 1;
 			}

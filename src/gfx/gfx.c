@@ -964,9 +964,9 @@ uint_32 gfx_tick_common(periph_p gfx_periph, uint_32 len)
 			"Overlay/Keyboard Position",
 			" ",			//spacer
 			"Controls",
-			"Back",
+			// "Back",
 			"Reset",
-			"Quit to rom chooser"};
+			"Exit"};
 
 			TTF_Init();
 			TTF_Font *ttffont = NULL;
@@ -974,7 +974,7 @@ uint_32 gfx_tick_common(periph_p gfx_periph, uint_32 len)
 			SDL_Color text_color_selected = {0,0,0};
 			ttffont = TTF_OpenFont("./ProggyTiny.ttf", 16);
 			int i;
-			for (i=0;i<9;i++)
+			for (i=0;i<8;i++)
 			{
 				SDL_Surface *textSurface;
 				if (i==selectedoption)		textSurface = TTF_RenderText_Solid(ttffont, s[i], text_color_selected);
