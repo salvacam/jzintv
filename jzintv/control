@@ -1,0 +1,10 @@
+Package: jzintv
+Version: 
+Description: RetroGame port of jzIntv
+Section: emus
+Priority: optional
+Maintainer: pingflood
+Architecture: mipsel
+Homepage: https://github.com/pingflood/jzintv
+Depends:
+Source: https://github.com/pingflood/jzintv

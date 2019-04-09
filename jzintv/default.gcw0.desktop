@@ -1,0 +1,12 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=JzIntellivision
+Type=Application
+Exec=jzintv %F
+Icon=dingux-int
+Comment=Intellivision emulator
+#Comment=Intellivision emulator
+Terminal=false
+Categories=emulators;
+Mimetype=application/octet-stream;
+X-OD-Manual=readmegcw.txt

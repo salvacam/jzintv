@@ -1,0 +1,6 @@
+title=Intellivision Emulator
+description=jzIntv
+exec=/home/retrofw/emus/jzintv/jzintv.dge
+selectordir=/home/retrofw/roms/intellivision
+selectorfilter=.rom,.bin,.int,.itv
+clock=600

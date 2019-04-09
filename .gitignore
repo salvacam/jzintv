@@ -2,3 +2,5 @@
 *.dge
 *.opk
 *.ipk
+bios
+bios/*.bin
