@@ -23,7 +23,7 @@ SDL_LIBS    := $(shell $(SYSROOT)/usr/bin/sdl-config --libs)
 ##############################################################################
 ## Project directory structure
 ##############################################################################
-B=../bin
+B=../jzintv
 L=../lib
 R=../rom
 
@@ -86,6 +86,19 @@ clean:
 
 OBJS += plat/plat_gp2x.o
 OBJS += pads/pads_cgc_linux.o
+
+ipk: $(PROG)
+	@rm -rf /tmp/.jzintv-ipk/ && mkdir -p /tmp/.jzintv-ipk/root/home/retrofw/emus/jzintv /tmp/.jzintv-ipk/root/home/retrofw/apps/gmenu2x/sections/emulators /tmp/.jzintv-ipk/root/home/retrofw/apps/gmenu2x/sections/emulators.systems
+	@cp -r ../jzintv/jzintv.dge ../jzintv/miniecs.bin ../jzintv/miniexec.bin ../jzintv/minigrom.bin ../jzintv/background.png ../jzintv/jzintv.man.txt ../jzintv/jzintv.png ../jzintv/ProggyTiny.ttf ../jzintv/ECS_kb_layout.png ../jzintv/ECS_kb_layout\(shift\).png ../jzintv/defaultoverlay.png /tmp/.jzintv-ipk/root/home/retrofw/emus/jzintv
+	@cp ../jzintv/jzintv.lnk /tmp/.jzintv-ipk/root/home/retrofw/apps/gmenu2x/sections/emulators
+	@cp ../jzintv/intellivision.jzintv.lnk /tmp/.jzintv-ipk/root/home/retrofw/apps/gmenu2x/sections/emulators.systems
+	@sed "s/^Version:.*/Version: $$(date +%Y%m%d)/" ../jzintv/control > /tmp/.jzintv-ipk/control
+	@cp ../jzintv/conffiles ../jzintv/postinst /tmp/.jzintv-ipk/
+	@tar --owner=0 --group=0 -czvf /tmp/.jzintv-ipk/control.tar.gz -C /tmp/.jzintv-ipk/ control conffiles postinst
+	@tar --owner=0 --group=0 -czvf /tmp/.jzintv-ipk/data.tar.gz -C /tmp/.jzintv-ipk/root/ .
+	@echo 2.0 > /tmp/.jzintv-ipk/debian-binary
+	@ar r ../jzintv/jzintv.ipk /tmp/.jzintv-ipk/control.tar.gz /tmp/.jzintv-ipk/data.tar.gz /tmp/.jzintv-ipk/debian-binary
+
 
 ##############################################################################
 ## Makefile.common includes all the subMakefiles and such
